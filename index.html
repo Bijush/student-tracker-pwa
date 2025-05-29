@@ -5,12 +5,111 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="theme-color" content="#007bff"/>
   <link rel="manifest" href="manifest.json"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js">
+      
+  </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
   <title>Student Tracker</title>
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <h1>Student Tracker (Offline Ready)</h1>
-  <p>This is your offline-capable version of the Student Tracker site.</p>
+  <div id="offlineStatus">
+  <span id="statusIcon">🔴</span>
+  <span id="statusText">Offline</span>
+</div>
+<div id="title">
+  <h2 id="htop">STUDENT ATTENDANCE TRACKER</h2>
+  <p class="p1">Session of the year 2025-26<br />
+  
+ <div class="report-button-container">
+    <button onclick="generateDateWiseAttendanceReport()">Generate Monthly Report</button>
+    <button onclick="generateDetailedYearlyAttendanceReport()">Generate Yearly Report</button>
+  </div>
+  
+  <hr color="red" /></p></div>
+<div class="form-container">
+  <label>Student Name</label>
+  <input type="text" id="studentName" />
+  <label>Class</label>
+  <input type="text" id="studentClass" />
+  <button onclick="addStudent()">Add Student</button>
+</div>
+
+<label>Filter by Class:</label>
+<select id="classFilter" onchange="renderTable()">
+  <option value="All" />All
+</select>
+
+<input type="text" id="searchInput" placeholder="Search by name..." onkeyup="renderTable()" />
+
+<label>Sort:</label>
+<select id="sortSelect" onchange="renderTable()">
+  <option value="class" />Sort by Class (High to Low)
+  <option value="name" />Sort by Name (A-Z)
+  <option value="present" />Sort by Present Days (High to Low)
+</select>
+
+  <div class="button-container">
+      
+    <button id="summaryBtn" onclick="toggleSummary()">
+        <i class="fa fa-list"></i>
+        Show Attendance Summary</button>
+    
+    <button id="feeBtn" onclick="toggleFeeDefaulterReport()">
+        <i class="fa fa-exclamation-triangle"></i>
+        
+        Toggle Fee Defaulters Report</button>
+
+    
+   <button id="bulkBtn" onclick="toggleBulkAttendance()">
+  <i class="fa fa-users"></i> Bulk Attendance
+</button>
+
+
+  </div>
+
+  <!-- Sections for showing content -->
+  <div id="defaulterReportDiv" style="display: none; margin-top: 20px; position: relative; border: 1px solid #ccc; padding: 10px;">
+  <!-- Close Icon (Font Awesome X icon) -->
+  <span onclick="hideFeeDefaulterReport()" style="position: absolute; top: 5px; right: 10px; cursor: pointer; font-size: 20px;">
+    <i class="fas fa-times"></i> <!-- Font Awesome 'times' icon -->
+  </span>
+  <div id="defaulterReportContent"></div>
+</div>
+
+
+  
+
+  <div id="summarySection" style="display:none; margin-top:15px;"></div>
+  
+  
+<div id="allAttendance" style="display: none; margin-bottom: 10px;">
+
+  <label for="bulkDay">Day:</label>
+  <select id="bulkDay">
+    <option value="" />Select Day
+    <!-- JS will populate the rest -->
+  </select>
+  <label for="bulkStatus">Mark as:</label>
+  <select id="bulkStatus">
+    <option value="" />Select Status
+    <option value="Present" />Present
+    <option value="Absent" />Absent
+  </select>
+  <button onclick="applyBulkAttendance()">Apply to All</button>
+  <button onclick="undoBulkAttendance()">Undo</button>
+</div>
+  <table id="attendanceTable"></table>
+  
+  <div class="footer">
+    <p>© Bijush Kumar Roy</p>
+  </div>
+
   <script src="app.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
