@@ -1,6 +1,301 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 2rem;
-  background-color: #f8f9fa;
+ <style>
+    body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin:12px;
+  background-color: #f9fafc;
   color: #333;
+  padding-bottom: 60px; /* Adjust the value according to footer height */
 }
+
+    h2 {
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+
+    input, select, button {
+      padding: 8px 10px;
+      margin: 8px 6px 16px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    button {
+      background-color: #2c87f0;
+      color: white;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.25s ease;
+    }
+
+    button:hover {
+      background-color: #1a6bd6;
+    }
+
+    .action-btn {
+      padding: 6px 10px;
+      font-size: 12px;
+      margin: 2px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    th, td {
+      padding: 6px;
+      text-align: center;
+      font-size: 13px;
+      border: 1px solid green;
+      vertical-align: middle;
+    }
+
+    th {
+      background-color:gray;
+      font-weight: 600;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9fbfd;
+    }
+
+    tr:hover {
+      background-color: #eef5ff;
+    }
+
+    small {
+      font-size: 11px;
+      color: #555;
+      display: inline-block;
+      margin-top: 4px;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    small:hover {
+      color: #2c87f0;
+    }
+
+    .present {
+      background-color: #d4edda !important;
+      color: #155724;
+    }
+
+    .absent {
+      background-color: #f8d7da !important;
+      color: #721c24;
+    }
+
+    select {
+      min-width: 60px;
+    }
+
+    #summarySection {
+      background: #fff;
+      padding: 15px 20px;
+      margin-top: 20px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+
+    @media screen and (max-width: 768px) {
+      table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+
+      input, select, button {
+        width: 100%;
+        margin: 6px 0;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+    }
+
+    .icon-btn {
+      background: none;
+      border: none;
+      color: #2c87f0;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 4px 0;
+    }
+
+    .icon-btn:hover {
+      color: #1a6bd6;
+    }
+
+    td select {
+      font-size: 13px;
+      padding: 4px;
+      border-radius: 4px;
+    }
+
+    .footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background-color: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 8px 0;
+      font-size: 13px;
+      
+    }
+   #offlineStatus {
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-align: right;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background-color: #f8d7da;
+  color: #721c24;
+  
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  z-index: 1000;
+ transition: background-color 0.3s ease, color 0.3s ease;
+
+}
+
+/* General input styling */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select {
+  width: 100%;
+  padding: 12px 16px;
+  margin: 8px 0;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+}
+
+/* Focus state */
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+select:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
+  outline: none;
+}
+
+/* Placeholder styling */
+input::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+.p1 {
+    text-align: center;
+    color: blue;
+    font-size: 2px;  /* Use font-size instead of text-size */
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+#htop{
+    text-align:center;
+    margin-top:50px; 
+}
+
+
+    /* Container to hold the buttons */
+    .button-container {
+      display: flex;
+      justify-content: space-between; /* Spacing between the buttons */
+      gap: 15px; /* Space between buttons */
+      margin: 20px 0;
+    }
+
+    /* Styling for individual buttons */
+    .button-container button {
+      padding: 8px 8px;
+      font-size: 12px;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    /* Add colors for each button */
+    .button-container button:first-child {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .button-container button:nth-child(2) {
+      background-color: #FF5733;
+      color: white;
+    }
+
+    .button-container button:last-child {
+      background-color: #008CBA;
+      color: white;
+    }
+
+    /* Button hover effects */
+    .button-container button:hover {
+      background-color: #555;
+      transform: scale(1.05);
+    }
+
+    /* Optional: Add a border when clicked */
+    .button-container button:active {
+      border: 2px solid #333;
+    }
+  
+.report-button-container {
+      display: flex;
+      gap: 15px;
+      margin: 20px 0;
+    }
+.report-button-container button {
+      padding: 10px 25px;
+      font-size: 10px;
+      font-weight: 600;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background-color: #6c63ff;
+      color: white;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .report-button-container button:hover {
+      background-color: #4a45cc;
+      transform: scale(1.05);
+    }
+    .report-button-container button:active {
+      background-color: #3a35b0;
+    }
+
+#defaulterReportDiv i.fas {
+  color: #FF0000; /* Red color */
+  font-size: 25px; /* Adjust size */
+}
+
+
+  </style>
