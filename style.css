@@ -300,6 +300,18 @@ input::placeholder {
   color: #FF0000; /* Red color */
   font-size: 25px; /* Adjust size */
 }
+.head{
+    background-color:#FFCCCC;
+    margin-bottom:15px;
+    padding:1px;
+    width:100%;
+    display: flex;
+    box-sizing: border-box;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
+  outline: none;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+}
 
 
   </style>
