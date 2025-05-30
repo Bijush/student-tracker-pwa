@@ -108,10 +108,18 @@
     }
 
     @media screen and (max-width: 768px) {
+     body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin:12px;
+  background-color: #f9fafc;
+  color: #333;
+  padding-bottom: 60px; /* Adjust the value according to footer height */
+     }
       table {
         display: block;
         overflow-x: auto;
         white-space: nowrap;
+       padding-bottm:20px;
       }
 
       input, select, button {
